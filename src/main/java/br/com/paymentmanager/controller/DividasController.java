@@ -9,7 +9,7 @@ import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.Divida;
 import br.com.paymentmanager.repository.ClienteRepository;
 import br.com.paymentmanager.repository.DividaRepository;
-import br.com.paymentmanager.service.ValorDaDividaInvalido;
+import br.com.paymentmanager.service.DividaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,7 +62,7 @@ public class DividasController {
     public static Divida verificarCliente(@RequestBody @Valid DividaForm form, ClienteRepository clienteRepository, DividaRepository dividaRepository) {
         Cliente cliente = clienteRepository.findById(form.getIdCliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
-        if (ValorDaDividaInvalido.validar(form.getValor(), cliente, dividaRepository)){
+        if (DividaService.validarValorDaDivida(form.getValor(), cliente, dividaRepository)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor das dívidas supera 12x a renda do cliente");
         }
         Divida divida = new DividaMapper().cadastrar(form, cliente);

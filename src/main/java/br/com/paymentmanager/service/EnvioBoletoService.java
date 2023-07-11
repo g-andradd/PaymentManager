@@ -10,6 +10,7 @@ import br.com.paymentmanager.projection.CodigosDosEnvios;
 import br.com.paymentmanager.projection.ResumoTotalCobrancas;
 import br.com.paymentmanager.repository.EmpresaRepository;
 import br.com.paymentmanager.repository.EnvioBoletoRepository;
+import br.com.paymentmanager.util.DataUtil;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class EnvioBoletoService {
 
     public List<EnvioBoletoDto> listarTodos(Long idEmpresa, String data) {
         List<UploadFile> ufList = envioBoletoRepository
-                .findAllByData(validarEmpresa(idEmpresa).getId(), Utils.inserirAnoMes(data))
+                .findAllByData(validarEmpresa(idEmpresa).getId(), DataUtil.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Nenhuma cobraça encontrada"));
 
         List<EnvioBoleto> envioBoletos = new EnvioBoletoMapper().transformarLista(ufList);
@@ -41,7 +42,7 @@ public class EnvioBoletoService {
 
     public ResumoTotalDto buscarResumoTotal(Long idEmpresa, String data) {
         ResumoTotalCobrancas resumoTotal = envioBoletoRepository
-                .findResumoTotal(validarEmpresa(idEmpresa).getId(), Utils.inserirAnoMes(data))
+                .findResumoTotal(validarEmpresa(idEmpresa).getId(), DataUtil.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar o resumo total"));
 
         return ResumoTotalDto.converter(resumoTotal);

@@ -1,4 +1,4 @@
-package br.com.paymentmanager.service;
+package br.com.paymentmanager.util;
 
 import org.springframework.stereotype.Service;
 
@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
-public class Utils {
+public class DataUtil {
 
     public static String inserirAnoMes(String data) {
         if(data == null) {

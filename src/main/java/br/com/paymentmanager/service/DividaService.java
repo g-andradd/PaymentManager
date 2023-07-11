@@ -5,8 +5,8 @@ import br.com.paymentmanager.repository.DividaRepository;
 
 import java.math.BigDecimal;
 
-public class ValorDaDividaInvalido {
-    public static boolean validar(BigDecimal valor, Cliente cliente, DividaRepository dividaRepository) {
+public class DividaService {
+    public static boolean validarValorDaDivida(BigDecimal valor, Cliente cliente, DividaRepository dividaRepository) {
         BigDecimal valorTotal = dividaRepository.buscaSomaDoValorDaDivida(cliente.getId());
         if(valorTotal == null){
             valorTotal = BigDecimal.ZERO;
