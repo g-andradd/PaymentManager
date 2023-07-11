@@ -36,16 +36,16 @@ public class ClientesController {
     }
 
     @GetMapping("/api/clientes")
-    public Page<ClienteWebDto> listarPaginado(@PageableDefault(size = 5,sort = {"dadosPessoais.nome", "status"},
+    public ResponseEntity<Page<ClienteWebDto>> listarPaginado(@PageableDefault(size = 5,sort = {"dadosPessoais.nome", "status"},
             direction = Direction.ASC) Pageable pageable) {
         Page<Cliente> clientes = clienteRepository.findAll(pageable);
-        return ClienteWebDto.converter(clientes);
+        return ResponseEntity.ok().body(ClienteWebDto.converter(clientes));
     }
 
     @GetMapping("/api/listaClientes")
-    public List<ClienteWebDto> listar() {
+    public ResponseEntity<List<ClienteWebDto>> listar() {
         List<Cliente> clientes = clienteRepository.findAll();
-        return ClienteWebDto.converterLista(clientes);
+        return ResponseEntity.ok().body(ClienteWebDto.converterLista(clientes));
     }
 
     @PostMapping("/api/clientes")
@@ -60,14 +60,14 @@ public class ClientesController {
 
     @GetMapping("/api/clientes/report")
     @Cacheable(value = "listaDeClientes")
-    public List<RelatorioClientesProjecao> listarReport() {
-        return clienteRepository.findNomeValorDasDividasCobrancas();
+    public ResponseEntity<List<RelatorioClientesProjecao>> listarReport() {
+        return ResponseEntity.ok().body(clienteRepository.findNomeValorDasDividasCobrancas());
     }
 
     @GetMapping("/api/clientes/{id}")
-    public ClienteDto detalhar(@PathVariable Long id) {
+    public ResponseEntity<ClienteDto> detalhar(@PathVariable Long id) {
         Cliente cliente = clienteRepository.getById(id);
-        return new ClienteDto(cliente);
+        return ResponseEntity.ok().body(new ClienteDto(cliente));
     }
 
     @PutMapping("/api/clientes/{id}")
