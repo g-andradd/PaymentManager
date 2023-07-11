@@ -1,15 +1,15 @@
 package br.com.paymentmanager.service;
 
-import br.com.paymentmanager.dto.CobrancaDto;
-import br.com.paymentmanager.dto.CodigosDasCobrancasDto;
+import br.com.paymentmanager.dto.CodigosDosEnviosDto;
+import br.com.paymentmanager.dto.EnvioBoletoDto;
 import br.com.paymentmanager.dto.ResumoTotalDto;
-import br.com.paymentmanager.mapper.CobrancaMapper;
+import br.com.paymentmanager.mapper.EnvioBoletoMapper;
 import br.com.paymentmanager.mapper.RegistrosUploadFileMapper;
 import br.com.paymentmanager.model.*;
-import br.com.paymentmanager.projection.CodigosDasCobrancas;
+import br.com.paymentmanager.projection.CodigosDosEnvios;
 import br.com.paymentmanager.projection.ResumoTotalCobrancas;
-import br.com.paymentmanager.repository.CobrancaRepository;
 import br.com.paymentmanager.repository.EmpresaRepository;
+import br.com.paymentmanager.repository.EnvioBoletoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,28 +19,28 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class CobrancaService {
+public class EnvioBoletoService {
 
-    private final CobrancaRepository cobrancaRepository;
+    private final EnvioBoletoRepository envioBoletoRepository;
     private final EmpresaRepository empresaRepository;
 
-    public CobrancaService(CobrancaRepository cobrancaRepository, EmpresaRepository empresaRepository) {
-        this.cobrancaRepository = cobrancaRepository;
+    public EnvioBoletoService(EnvioBoletoRepository envioBoletoRepository, EmpresaRepository empresaRepository) {
+        this.envioBoletoRepository = envioBoletoRepository;
         this.empresaRepository = empresaRepository;
     }
 
-    public List<CobrancaDto> listarTodos(Long idEmpresa, String data) {
-        List<UploadFile> ufList = cobrancaRepository
+    public List<EnvioBoletoDto> listarTodos(Long idEmpresa, String data) {
+        List<UploadFile> ufList = envioBoletoRepository
                 .findAllByData(validarEmpresa(idEmpresa).getId(), Utils.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Nenhuma cobraça encontrada"));
 
-        List<Cobranca> cobrancas = new CobrancaMapper().transformarLista(ufList);
+        List<EnvioBoleto> envioBoletos = new EnvioBoletoMapper().transformarLista(ufList);
 
-        return CobrancaDto.converter(cobrancas);
+        return EnvioBoletoDto.converter(envioBoletos);
     }
 
     public ResumoTotalDto buscarResumoTotal(Long idEmpresa, String data) {
-        ResumoTotalCobrancas resumoTotal = cobrancaRepository
+        ResumoTotalCobrancas resumoTotal = envioBoletoRepository
                 .findResumoTotal(validarEmpresa(idEmpresa).getId(), Utils.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar o resumo total"));
 
@@ -48,24 +48,24 @@ public class CobrancaService {
 
     }
 
-    public List<CodigosDasCobrancasDto> buscarCodigosDasCobrancas(Long idEmpresa, String data) {
-        List<CodigosDasCobrancas> codigosDasCobrancas = cobrancaRepository.findAllCodigosByData(idEmpresa, data)
+    public List<CodigosDosEnviosDto> buscarCodigosDosEnvios(Long idEmpresa, String data) {
+        List<CodigosDosEnvios> codigosDosEnvios = envioBoletoRepository.findAllCodigosByData(idEmpresa, data)
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar os codigos das cobrancas"));
 
-        return CodigosDasCobrancasDto.converter(codigosDasCobrancas);
+        return CodigosDosEnviosDto.converter(codigosDosEnvios);
     }
 
     @Transactional
-    public void cancelarCobranca(String nomeUsuario, Long codCobranca) {
-        UploadFile uf = cobrancaRepository.findById(codCobranca)
+    public void cancelarEnvioBoleto(String nomeUsuario, Long id) {
+        UploadFile uf = envioBoletoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UploadFile não encontrado"));
         uf.setSituacaoArquivo(SituacaoArquivo.CANCELADO);
         uf.setDataHoraAlteracao(Date.from(Instant.now()));
         uf.setUsuarioAlteracao(nomeUsuario);
-        cobrancaRepository.save(uf);
+        envioBoletoRepository.save(uf);
         RegistrosUploadFile ruf = new RegistrosUploadFileMapper().transformar(uf);
         new RegistrosUploadFileService().inserir(ruf);
-        cobrancaRepository.delete(uf);
+        envioBoletoRepository.delete(uf);
     }
 
     private Empresa validarEmpresa(Long id) {

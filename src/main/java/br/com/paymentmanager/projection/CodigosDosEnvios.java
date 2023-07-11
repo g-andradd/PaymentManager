@@ -1,6 +1,6 @@
 package br.com.paymentmanager.projection;
 
-public interface CodigosDasCobrancas {
+public interface CodigosDosEnvios {
 
     long getCodigo();
     String getNomeArquivo();
