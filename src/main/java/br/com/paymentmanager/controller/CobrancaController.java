@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cobrancas")
-public class CobrancasController {
+public class CobrancaController {
 
     @Autowired
     private CobrancaRepository cobrancaRepository;

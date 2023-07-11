@@ -27,11 +27,11 @@ import java.util.List;
 @RestController
 @RequestMapping
 @CrossOrigin
-public class ClientesController {
+public class ClienteController {
 
     private final ClienteRepository clienteRepository;
 
-    public ClientesController(ClienteRepository clienteRepository) {
+    public ClienteController(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
 

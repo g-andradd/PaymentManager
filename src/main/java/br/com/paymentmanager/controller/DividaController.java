@@ -29,7 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/dividas")
 @CrossOrigin
-public class DividasController {
+public class DividaController {
 
     @Autowired
     private ClienteRepository clienteRepository;
