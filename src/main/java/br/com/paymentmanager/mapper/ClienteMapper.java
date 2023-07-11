@@ -6,7 +6,6 @@ import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.DadosPessoais;
 import br.com.paymentmanager.model.Endereco;
 import br.com.paymentmanager.model.StatusCliente;
-import br.com.paymentmanager.repository.ClienteRepository;
 
 public class ClienteMapper {
 
@@ -25,13 +24,7 @@ public class ClienteMapper {
         return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public void atualizar(ClienteRepository clienteRepository, AtualizacaoClienteForm form) {
-        Cliente cliente = clienteRepository.getById(form.getId());
-        cliente.setCpf(form.getCpf());
-        criarCliente(cliente, form);
-    }
-
-    public Cliente atualizarApi(Cliente cliente, AtualizacaoClienteForm form) {
+    public Cliente atualizar(Cliente cliente, AtualizacaoClienteForm form) {
         criarCliente(cliente, form);
         return cliente;
     }
