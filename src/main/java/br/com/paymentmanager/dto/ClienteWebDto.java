@@ -2,7 +2,6 @@ package br.com.paymentmanager.dto;
 
 import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.StatusCliente;
-import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,10 +53,6 @@ public class ClienteWebDto {
 
     public StatusCliente getStatus() {
         return status;
-    }
-
-    public static Page<ClienteWebDto> converter(Page<Cliente> clientes) {
-        return clientes.map(ClienteWebDto::new);
     }
 
     public static List<ClienteWebDto> converterLista(List<Cliente> clientes) {
