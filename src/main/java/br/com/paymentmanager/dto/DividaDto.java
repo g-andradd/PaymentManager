@@ -5,8 +5,6 @@ import br.com.paymentmanager.model.StatusDivida;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DividaDto {
 
@@ -65,7 +63,4 @@ public class DividaDto {
         return idCliente;
     }
 
-    public static List<DividaDto> converter(List<Divida> dividas){
-        return dividas.stream().map(DividaDto::new).collect(Collectors.toList());
-    }
 }

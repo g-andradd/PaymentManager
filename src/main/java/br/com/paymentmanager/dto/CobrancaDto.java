@@ -6,8 +6,6 @@ import br.com.paymentmanager.model.TipoAcordo;
 import br.com.paymentmanager.model.TipoAgente;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CobrancaDto {
 
@@ -94,7 +92,4 @@ public class CobrancaDto {
         return idDivida;
     }
 
-    public static List<CobrancaDto> converter(List<Cobranca> cobrancas) {
-        return cobrancas.stream().map(CobrancaDto::new).collect(Collectors.toList());
-    }
 }
