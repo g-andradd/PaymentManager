@@ -26,9 +26,12 @@ public class EnvioBoletoService {
     private final EnvioBoletoRepository envioBoletoRepository;
     private final EmpresaRepository empresaRepository;
 
-    public EnvioBoletoService(EnvioBoletoRepository envioBoletoRepository, EmpresaRepository empresaRepository) {
+    private final RegistrosUploadFileService registrosUploadFileService;
+
+    public EnvioBoletoService(EnvioBoletoRepository envioBoletoRepository, EmpresaRepository empresaRepository, RegistrosUploadFileService registrosUploadFileService) {
         this.envioBoletoRepository = envioBoletoRepository;
         this.empresaRepository = empresaRepository;
+        this.registrosUploadFileService = registrosUploadFileService;
     }
 
     public List<EnvioBoletoDto> listarTodos(Long idEmpresa, String data) {
@@ -51,7 +54,7 @@ public class EnvioBoletoService {
     }
 
     public List<CodigosDosEnviosDto> buscarCodigosDosEnvios(Long idEmpresa, String data) {
-        List<CodigosDosEnvios> codigosDosEnvios = envioBoletoRepository.findAllCodigosByData(idEmpresa, data)
+        List<CodigosDosEnvios> codigosDosEnvios = this.envioBoletoRepository.findAllCodigosByData(idEmpresa, data)
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar os codigos das cobrancas"));
 
         return codigosDosEnvios.stream().map(CodigosDosEnviosDto::new).collect(Collectors.toList());
@@ -59,19 +62,19 @@ public class EnvioBoletoService {
 
     @Transactional
     public void cancelarEnvioBoleto(String nomeUsuario, Long id) {
-        UploadFile uf = envioBoletoRepository.findById(id)
+        UploadFile uf = this.envioBoletoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UploadFile não encontrado"));
         uf.setSituacaoArquivo(SituacaoArquivo.CANCELADO);
         uf.setDataHoraAlteracao(Date.from(Instant.now()));
         uf.setUsuarioAlteracao(nomeUsuario);
-        envioBoletoRepository.save(uf);
+        this.envioBoletoRepository.save(uf);
         RegistrosUploadFile ruf = new RegistrosUploadFileMapper().transformar(uf);
-        new RegistrosUploadFileService().inserir(ruf);
-        envioBoletoRepository.delete(uf);
+        this.registrosUploadFileService.inserir(ruf);
+        this.envioBoletoRepository.delete(uf);
     }
 
     private Empresa validarEmpresa(Long id) {
-        return empresaRepository.findById(id)
+        return this.empresaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Empresa não encontrada ao buscar o resumo total"));
     }
 
