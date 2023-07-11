@@ -54,7 +54,7 @@ public class DividaService {
         dividaRepository.deleteById(divida.getId());
     }
 
-    private Divida buscarDivida(Long id) {
+    protected Divida buscarDivida(Long id) {
         return this.dividaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id da divida não encontrado"));
     }

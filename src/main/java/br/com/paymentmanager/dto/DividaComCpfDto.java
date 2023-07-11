@@ -2,7 +2,6 @@ package br.com.paymentmanager.dto;
 
 import br.com.paymentmanager.model.Divida;
 import br.com.paymentmanager.model.StatusDivida;
-import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -59,10 +58,6 @@ public class DividaComCpfDto {
 
     public String getCpf() {
         return cpf;
-    }
-
-    public static Page<DividaComCpfDto> converter(Page<Divida> dividas) {
-        return dividas.map(DividaComCpfDto::new);
     }
 
 }

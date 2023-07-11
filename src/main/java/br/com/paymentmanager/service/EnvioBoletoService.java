@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EnvioBoletoService {
@@ -53,7 +54,7 @@ public class EnvioBoletoService {
         List<CodigosDosEnvios> codigosDosEnvios = envioBoletoRepository.findAllCodigosByData(idEmpresa, data)
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar os codigos das cobrancas"));
 
-        return CodigosDosEnviosDto.converter(codigosDosEnvios);
+        return codigosDosEnvios.stream().map(CodigosDosEnviosDto::new).collect(Collectors.toList());
     }
 
     @Transactional
