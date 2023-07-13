@@ -35,7 +35,7 @@ public class EnvioBoletoService {
     }
 
     public List<EnvioBoletoDto> listarTodos(Long idEmpresa, String data) {
-        List<UploadFile> ufList = envioBoletoRepository
+        List<UploadFile> ufList = this.envioBoletoRepository
                 .findAllByData(validarEmpresa(idEmpresa).getId(), DataUtil.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Nenhuma cobraça encontrada"));
 
@@ -45,7 +45,7 @@ public class EnvioBoletoService {
     }
 
     public ResumoTotalDto buscarResumoTotal(Long idEmpresa, String data) {
-        ResumoTotalCobrancas resumoTotal = envioBoletoRepository
+        ResumoTotalCobrancas resumoTotal = this.envioBoletoRepository
                 .findResumoTotal(validarEmpresa(idEmpresa).getId(), DataUtil.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Não foi possível buscar o resumo total"));
 
