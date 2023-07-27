@@ -1,5 +1,6 @@
 package br.com.paymentmanager.config.validacao;
 
+import br.com.paymentmanager.exception.ResourceNotFoundException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,19 +41,14 @@ public class ErroDeValidacaoHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ResponseStatusException.class)
-    public List<Retorno> handle(ResponseStatusException exception){
-        List<Retorno> retornos = new ArrayList<>();
-        Retorno ret = new Retorno(0, exception.getReason());
-        retornos.add(ret);
-        return retornos;
+    public Retorno handle(ResponseStatusException exception){
+        return new Retorno(0, exception.getReason());
     }
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(RuntimeException.class)
-    public List<Retorno> handle(RuntimeException exception){
-        List<Retorno> retornos = new ArrayList<>();
-        Retorno ret = new Retorno(0, exception.getMessage());
-        retornos.add(ret);
-        return retornos;
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ErroPadrao handle(ResourceNotFoundException e) {
+        return new ErroPadrao(Instant.now(), "Resource not found", e.getMessage(), e.getLocalizedMessage());
     }
+
 }

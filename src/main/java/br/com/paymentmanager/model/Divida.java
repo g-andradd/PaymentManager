@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "divida")
+@Table(name = "dividas")
 public class Divida {
 
     @Id

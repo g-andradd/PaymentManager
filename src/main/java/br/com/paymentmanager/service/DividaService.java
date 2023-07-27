@@ -2,6 +2,7 @@ package br.com.paymentmanager.service;
 
 import br.com.paymentmanager.dto.DividaComCpfDto;
 import br.com.paymentmanager.dto.DividaDto;
+import br.com.paymentmanager.exception.ResourceNotFoundException;
 import br.com.paymentmanager.form.DividaForm;
 import br.com.paymentmanager.mapper.DividaMapper;
 import br.com.paymentmanager.model.Cliente;
@@ -10,10 +11,8 @@ import br.com.paymentmanager.repository.ClienteRepository;
 import br.com.paymentmanager.repository.DividaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,11 +55,11 @@ public class DividaService {
 
     protected Divida buscarDivida(Long id) {
         return this.dividaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id da divida não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Divida não encontrada"));
     }
 
     private Cliente buscarCliente(Long id) {
         return this.clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
     }
 }

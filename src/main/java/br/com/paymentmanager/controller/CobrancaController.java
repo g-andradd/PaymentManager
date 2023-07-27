@@ -14,15 +14,25 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cobrancas")
+@RequestMapping("/cobrancas")
 public class CobrancaController {
 
     @Autowired
     private CobrancaService cobrancaService;
 
     @GetMapping
-    public ResponseEntity<List<CobrancaDto>> listar() {
-        return ResponseEntity.ok().body(cobrancaService.listar());
+    public ResponseEntity<List<CobrancaDto>> listarTodas() {
+        return ResponseEntity.ok(cobrancaService.listarTodas());
+    }
+
+    @GetMapping("divida/{dividaId}")
+    public ResponseEntity<List<CobrancaDto>> listarPorDivida(@PathVariable Long dividaId) {
+        return ResponseEntity.ok(cobrancaService.listarPorDivida(dividaId));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CobrancaDto> detalhar(@PathVariable Long id) {
+        return ResponseEntity.ok(cobrancaService.buscarPorId(id));
     }
 
     @PostMapping
