@@ -18,7 +18,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dividas")
+@RequestMapping("/dividas")
 @CrossOrigin
 public class DividaController {
 
@@ -41,7 +41,7 @@ public class DividaController {
 
         DividaDto dividaDto = dividaService.cadastrar(form);
 
-        URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(dividaDto.getId()).toUri();
+        URI uri = uriBuilder.path("/dividas/{id}").buildAndExpand(dividaDto.getId()).toUri();
         return ResponseEntity.created(uri).body(dividaDto);
     }
 

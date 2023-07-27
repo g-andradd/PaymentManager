@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/envios")
 public class EnvioBoletoController {
 
     private final EnvioBoletoService envioBoletoService;
@@ -20,7 +22,7 @@ public class EnvioBoletoController {
 
     //todo Fazer o token
 
-    @GetMapping("/cobrancas")
+    @GetMapping
     public List<EnvioBoletoDto> listar(@RequestParam String data) {
         return envioBoletoService.listarTodos(1L, data);
     }
@@ -30,12 +32,12 @@ public class EnvioBoletoController {
         return envioBoletoService.buscarResumoTotal(1L, data);
     }
 
-    @GetMapping("/cobrancas/codigo")
+    @GetMapping("/codigo")
     public List<CodigosDosEnviosDto> listarCodigos(@RequestParam String data) {
         return envioBoletoService.buscarCodigosDosEnvios(1L, data);
     }
 
-    @PutMapping("/cobrancas/cancelar/{codigo}")
+    @PutMapping("/cancelar/{codigo}")
     public ResponseEntity<Void> cancelar(@PathVariable Long codigo) {
         envioBoletoService.cancelarEnvioBoleto("Teste", codigo);
         return ResponseEntity.ok().build();

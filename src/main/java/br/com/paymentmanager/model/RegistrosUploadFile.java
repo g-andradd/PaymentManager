@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 
 @Entity
-@Table(name = "SORPAG_REGISTROS_UPLOAD_FILE")
+@Table(name = "registros_dos_arquivos")
 @Data
 @Builder
 @NoArgsConstructor
