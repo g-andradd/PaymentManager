@@ -19,7 +19,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/clientes")
 @CrossOrigin
 public class ClienteController {
 
@@ -29,18 +29,13 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    @GetMapping("/api/clientes")
+    @GetMapping
     public ResponseEntity<Page<ClienteWebDto>> listarPaginado(@PageableDefault(size = 5,
             sort = {"dadosPessoais.nome", "status"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        return ResponseEntity.ok().body(clienteService.listarPaginado(pageable));
+        return ResponseEntity.ok().body(clienteService.listar(pageable));
     }
 
-    @GetMapping("/api/listaClientes")
-    public ResponseEntity<List<ClienteWebDto>> listar() {
-        return ResponseEntity.ok().body(clienteService.listar());
-    }
-
-    @PostMapping("/api/clientes")
+    @PostMapping
     public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder) {
         ClienteDto clienteDto = clienteService.cadastrar(form);
 
@@ -48,28 +43,28 @@ public class ClienteController {
         return ResponseEntity.created(uri).body(clienteDto);
     }
 
-    @GetMapping("/api/clientes/report")
+    @GetMapping("/report")
     public ResponseEntity<List<RelatorioClientesProjecao>> listarReport() {
         return ResponseEntity.ok().body(clienteService.listarReport());
     }
 
-    @GetMapping("/api/clientes/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ClienteDto> detalhar(@PathVariable Long id) {
         return ResponseEntity.ok().body(clienteService.detalhar(id));
     }
 
-    @PutMapping("/api/clientes/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoClienteForm form) {
         return ResponseEntity.ok(clienteService.atualizar(id, form));
     }
 
-    @DeleteMapping("/api/clientes/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ClienteDto> remover(@PathVariable Long id){
         clienteService.remover(id);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/api/clientes/status/{id}")
+    @PutMapping("/status/{id}")
     public ResponseEntity<ClienteDto> atualizarStatus(@PathVariable Long id) {
         clienteService.atualizarStatus(id);
         return ResponseEntity.ok().build();

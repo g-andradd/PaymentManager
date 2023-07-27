@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -29,15 +28,10 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public Page<ClienteWebDto> listarPaginado(Pageable pageable) {
+    public Page<ClienteWebDto> listar(Pageable pageable) {
         Page<Cliente> clientes = clienteRepository.findAll(pageable);
 
         return clientes.map(ClienteWebDto::new);
-    }
-
-    public List<ClienteWebDto> listar() {
-        List<Cliente> clientes = clienteRepository.findAll();
-        return clientes.stream().map(ClienteWebDto::new).collect(Collectors.toList());
     }
 
     @Transactional
