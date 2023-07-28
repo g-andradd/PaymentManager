@@ -2,7 +2,7 @@ package br.com.paymentmanager.service;
 
 import br.com.paymentmanager.dto.ClienteDto;
 import br.com.paymentmanager.dto.ClienteWebDto;
-import br.com.paymentmanager.form.AtualizacaoClienteForm;
+import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
 import br.com.paymentmanager.mapper.ClienteMapper;
 import br.com.paymentmanager.model.Cliente;
@@ -52,8 +52,8 @@ public class ClienteService {
     }
 
     @Transactional
-    public ClienteDto atualizar(Long id, AtualizacaoClienteForm form) {
-        Cliente cliente = clienteRepository.getReferenceById(id);
+    public ClienteDto atualizar(AtualizaClienteForm form) {
+        Cliente cliente = clienteRepository.getReferenceById(form.getId());
         Cliente atualizado = new ClienteMapper().atualizar(cliente, form);
 
         return new ClienteDto(atualizado);

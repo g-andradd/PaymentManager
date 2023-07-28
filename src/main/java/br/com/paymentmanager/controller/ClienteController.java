@@ -2,7 +2,7 @@ package br.com.paymentmanager.controller;
 
 import br.com.paymentmanager.dto.ClienteDto;
 import br.com.paymentmanager.dto.ClienteWebDto;
-import br.com.paymentmanager.form.AtualizacaoClienteForm;
+import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
 import br.com.paymentmanager.projection.RelatorioClientesProjecao;
 import br.com.paymentmanager.service.ClienteService;
@@ -53,15 +53,15 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.detalhar(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoClienteForm form) {
-        return ResponseEntity.ok(clienteService.atualizar(id, form));
+    @PutMapping
+    public ResponseEntity<ClienteDto> atualizar(@RequestBody @Valid AtualizaClienteForm form) {
+        return ResponseEntity.ok(clienteService.atualizar(form));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClienteDto> remover(@PathVariable Long id){
+    public ResponseEntity<Void> remover(@PathVariable Long id){
         clienteService.remover(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/status/{id}")
