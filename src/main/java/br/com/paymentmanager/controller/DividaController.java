@@ -46,9 +46,9 @@ public class DividaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DividaComCpfDto> remover(@PathVariable Long id){
+    public ResponseEntity<Void> remover(@PathVariable Long id){
         dividaService.remover(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }

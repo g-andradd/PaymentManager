@@ -1,6 +1,6 @@
 package br.com.paymentmanager.mapper;
 
-import br.com.paymentmanager.form.AtualizacaoClienteForm;
+import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
 import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.DadosPessoais;
@@ -24,12 +24,12 @@ public class ClienteMapper {
         return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public Cliente atualizar(Cliente cliente, AtualizacaoClienteForm form) {
+    public Cliente atualizar(Cliente cliente, AtualizaClienteForm form) {
         criarCliente(cliente, form);
         return cliente;
     }
 
-    private void criarCliente(Cliente cliente, AtualizacaoClienteForm form) {
+    private void criarCliente(Cliente cliente, AtualizaClienteForm form) {
         cliente.setNome(form.getNome());
         cliente.setTelefone(form.getTelefone());
         cliente.setEmail(form.getEmail());

@@ -1,6 +1,8 @@
 package br.com.paymentmanager.config.validacao;
 
+import br.com.paymentmanager.exception.DatabaseException;
 import br.com.paymentmanager.exception.ResourceNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -47,8 +49,14 @@ public class ErroDeValidacaoHandler {
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ErroPadrao handle(ResourceNotFoundException e) {
-        return new ErroPadrao(Instant.now(), "Resource not found", e.getMessage(), e.getLocalizedMessage());
+    public ErroPadrao handle(ResourceNotFoundException e, HttpServletRequest request) {
+        return new ErroPadrao(Instant.now(), "Resource not found", e.getMessage(), request.getRequestURI());
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DatabaseException.class)
+    public ErroPadrao handle(DatabaseException e, HttpServletRequest request) {
+        return new ErroPadrao(Instant.now(), "Database exception", e.getMessage(), request.getRequestURI());
     }
 
 }

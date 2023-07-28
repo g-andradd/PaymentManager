@@ -1,13 +1,17 @@
 package br.com.paymentmanager.service;
 
 import br.com.paymentmanager.dto.CobrancaDto;
+import br.com.paymentmanager.exception.DatabaseException;
 import br.com.paymentmanager.exception.ResourceNotFoundException;
+import br.com.paymentmanager.form.AtualizaCobrancaForm;
 import br.com.paymentmanager.form.CobrancaForm;
 import br.com.paymentmanager.mapper.CobrancaMapper;
 import br.com.paymentmanager.model.Cobranca;
 import br.com.paymentmanager.model.Divida;
 import br.com.paymentmanager.repository.CobrancaRepository;
 import br.com.paymentmanager.repository.DividaRepository;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,10 +53,33 @@ public class CobrancaService {
 
 
     public CobrancaDto buscarPorId(Long id) {
-        Cobranca cobranca = cobrancaRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cobrança não encontrada"));
+        Cobranca cobranca = criarCobrancaOption(id);
 
         return new CobrancaDto(cobranca);
     }
+
+    @Transactional
+    public CobrancaDto atualizar(AtualizaCobrancaForm form) {
+        Cobranca cobranca = criarCobrancaOption(form.getId());
+        Cobranca atualizada = new CobrancaMapper().atualizar(cobranca, form);
+
+        return new CobrancaDto(atualizada);
+    }
+
+    public void deletar(Long id) {
+        try {
+            cobrancaRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Cobranca não encontrada" + id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Violação de integridade");
+        }
+    }
+
+    private Cobranca criarCobrancaOption(Long id) {
+        return cobrancaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cobrança não encontrada"));
+    }
+
 }

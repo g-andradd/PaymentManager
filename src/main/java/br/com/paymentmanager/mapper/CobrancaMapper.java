@@ -1,6 +1,7 @@
 package br.com.paymentmanager.mapper;
 
 
+import br.com.paymentmanager.form.AtualizaCobrancaForm;
 import br.com.paymentmanager.form.CobrancaForm;
 import br.com.paymentmanager.model.*;
 import br.com.paymentmanager.repository.CobrancaRepository;
@@ -34,4 +35,17 @@ public class CobrancaMapper {
     }
 
 
+    public Cobranca atualizar(Cobranca cobranca, AtualizaCobrancaForm form) {
+        cobranca.setDataDeRealizacao(form.getDataDeRealizacao());
+        cobranca.setMeioDeContato(form.getMeioDeContato());
+        cobranca.setAgente(form.getAgente());
+        cobranca.setTipoDeAgente(form.getTipoDeAgente());
+        cobranca.setComentarioDoAgente(form.getComentarioDoAgente());
+        cobranca.setAcordo(form.getAcordo());
+        cobranca.setTipoDeAcordo(form.getTipoDeAcordo());
+        cobranca.setDataDePromessaDePagamento(form.getDataDePromessaDePagamento());
+        cobranca.setNumeroDeParcelas(form.getNumeroDeParcelas());
+
+        return cobranca;
+    }
 }

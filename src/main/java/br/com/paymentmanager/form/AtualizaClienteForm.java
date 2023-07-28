@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public class AtualizacaoClienteForm {
+public class AtualizaClienteForm {
 
     @NotNull
     private Long id;

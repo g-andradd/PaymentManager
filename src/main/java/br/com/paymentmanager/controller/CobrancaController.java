@@ -2,6 +2,7 @@ package br.com.paymentmanager.controller;
 
 
 import br.com.paymentmanager.dto.CobrancaDto;
+import br.com.paymentmanager.form.AtualizaCobrancaForm;
 import br.com.paymentmanager.form.CobrancaForm;
 import br.com.paymentmanager.service.CobrancaService;
 import jakarta.validation.Valid;
@@ -39,8 +40,19 @@ public class CobrancaController {
     public ResponseEntity<CobrancaDto> cadastrar(@RequestBody @Valid CobrancaForm form, UriComponentsBuilder uriBuilder) {
         CobrancaDto cobrancaDto = cobrancaService.cadastrar(form);
 
-        URI uri = uriBuilder.path("/api/cobrancas/{id}").buildAndExpand(cobrancaDto.getId()).toUri();
+        URI uri = uriBuilder.path("/cobrancas/{id}").buildAndExpand(cobrancaDto.getId()).toUri();
         return ResponseEntity.created(uri).body(cobrancaDto);
+    }
+
+    @PutMapping
+    public ResponseEntity<CobrancaDto> atualizar(@RequestBody @Valid AtualizaCobrancaForm form) {
+        return ResponseEntity.ok(cobrancaService.atualizar(form));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        cobrancaService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
