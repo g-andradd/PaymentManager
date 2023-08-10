@@ -22,11 +22,6 @@ public class CobrancaMapper {
         cobranca.setDataDePromessaDePagamento(form.getDataDePromessaDePagamento());
         cobranca.setNumeroDeParcelas(form.getNumeroDeParcelas());
 
-        TipoAcordo tipoDeAcordo = form.getTipoDeAcordo();
-        if (tipoDeAcordo != null) {
-            cobranca.setTipoDeAcordo(tipoDeAcordo);
-        }
-
         if (cobrancaRepository.somaDeCobrancasDaDivida(form.getIdDivida()) == 3) {
             divida.setStatus(StatusDivida.RECUPERACAO_JUDICIAL);
         }

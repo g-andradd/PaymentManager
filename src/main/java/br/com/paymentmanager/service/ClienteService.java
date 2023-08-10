@@ -2,8 +2,9 @@ package br.com.paymentmanager.service;
 
 import br.com.paymentmanager.dto.ClienteDto;
 import br.com.paymentmanager.dto.ClienteWebDto;
-import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
+import br.com.paymentmanager.form.DadosPessoaisForm;
+import br.com.paymentmanager.form.EnderecoForm;
 import br.com.paymentmanager.mapper.ClienteMapper;
 import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.StatusCliente;
@@ -51,14 +52,6 @@ public class ClienteService {
         return new ClienteDto(clienteRepository.getReferenceById(id));
     }
 
-    @Transactional
-    public ClienteDto atualizar(AtualizaClienteForm form) {
-        Cliente cliente = clienteRepository.getReferenceById(form.getId());
-        Cliente atualizado = new ClienteMapper().atualizar(cliente, form);
-
-        return new ClienteDto(atualizado);
-    }
-
     //todo implementar validações e tratamento de erros
     @Transactional
     public void remover(Long id) {
@@ -77,4 +70,19 @@ public class ClienteService {
         }
     }
 
+    @Transactional
+    public ClienteDto atualizarDadosPessoais(Long id, DadosPessoaisForm form) {
+        Cliente cliente = clienteRepository.getReferenceById(id);
+        Cliente atualizado = new ClienteMapper().atualizarDadosPessoais(cliente, form);
+
+        return new ClienteDto(atualizado);
+    }
+
+    @Transactional
+    public ClienteDto atualizarEndereco(Long id, EnderecoForm form) {
+        Cliente cliente = clienteRepository.getReferenceById(id);
+        Cliente atualizado = new ClienteMapper().atualizarEndereco(cliente, form);
+
+        return new ClienteDto(atualizado);
+    }
 }

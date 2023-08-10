@@ -1,6 +1,5 @@
 package br.com.paymentmanager.service;
 
-import br.com.paymentmanager.dto.RegistroUploadFileDto;
 import br.com.paymentmanager.repository.RegistrosUploadFileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
