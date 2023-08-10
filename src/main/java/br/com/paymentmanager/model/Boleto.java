@@ -1,25 +1,25 @@
 package br.com.paymentmanager.model;
 
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.List;
 
+
+@Entity
+@Table(name = "boletos")
+@PrimaryKeyJoinColumn(name = "pagamento_id")
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Boleto {
+public class Boleto extends Pagamento{
 
-    private Calendar dataProcessamento;
-    private Calendar dataVencimento;
-    private String logradouroBeneficiario;
-    private String bairroBeneficiario;
-    private String cepBeneficiario;
-    private String cidadeBeneficiario;
-    private String ufBeneficiario;
-    private String nomeBeneficiario;
-    private String documentoBeneficiario;
     private String agenciaBeneficiario;
     private String digitoAgenciaBeneficiario;
     private String codigoBeneficiario;
@@ -28,14 +28,6 @@ public class Boleto {
     private String carteiraBeneficiario;
     private String nossoNumeroBeneficiario;
     private String digitoNossoNumeroBeneficiario;
-    private String logradouroPagador;
-    private String bairroPagador;
-    private String cepPagador;
-    private String cidadePagador;
-    private String ufPagador;
-    private String nomePagador;
-    private String documentoPagador;
-    private BigDecimal valorBoleto;
     private String numeroDocumento;
     private List<String> instrucoes;
     private List<String> locaisDePagamento;

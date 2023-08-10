@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Getter
 @Builder
-public class EnvioBoleto {
+public class Envio {
 
     private long codigo;
     private Date dataHoraCriacao;
-    private SituacaoArquivo status;
+    private SituacaoPagamento status;
     private Date dataHoraProcessamento;
     private String nomeArquivo;
     private int quantidadeRegistros;

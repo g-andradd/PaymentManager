@@ -6,11 +6,11 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Endereco{
 
-    @Column(nullable=false, length=100)
-    private String rua;
+    @Column(nullable=false, length=8)
+    private String cep;
 
-    @Column(nullable=false, length=100)
-    private String numero;
+    @Column(nullable=false, length=10)
+    private int numero;
 
     @Column(length=100)
     private String complemento;
@@ -27,27 +27,28 @@ public class Endereco{
     public Endereco() {
     }
 
-    public Endereco(String rua, String numero, String bairro, String cidade, String estado) {
-        this.rua = rua;
+    public Endereco(String cep, int numero, String complemento, String bairro, String cidade, String estado) {
+        this.cep = cep;
         this.numero = numero;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
     }
 
-    public String getRua() {
-        return rua;
+    public String getCep() {
+        return cep;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -86,8 +87,8 @@ public class Endereco{
     @Override
     public String toString() {
         return "Endereco{" +
-                "rua='" + rua + '\'' +
-                ", numero='" + numero + '\'' +
+                "cep='" + cep + '\'' +
+                ", numero=" + numero +
                 ", complemento='" + complemento + '\'' +
                 ", bairro='" + bairro + '\'' +
                 ", cidade='" + cidade + '\'' +

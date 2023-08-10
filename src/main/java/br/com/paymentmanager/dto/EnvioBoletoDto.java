@@ -1,6 +1,6 @@
 package br.com.paymentmanager.dto;
 
-import br.com.paymentmanager.model.EnvioBoleto;
+import br.com.paymentmanager.model.Envio;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ public class EnvioBoletoDto {
     private final int quantidadeRegistros;
     private final BigDecimal valorTotal;
 
-    public EnvioBoletoDto(EnvioBoleto envioBoleto) {
+    public EnvioBoletoDto(Envio envioBoleto) {
         this.codigo = envioBoleto.getCodigo();
         this.dataHoraCriacao = envioBoleto.getDataHoraCriacao();
         this.status = envioBoleto.getStatus().getValor();
@@ -29,7 +29,7 @@ public class EnvioBoletoDto {
         this.valorTotal = envioBoleto.getValorTotal();
     }
 
-    public static List<EnvioBoletoDto> converter(List<EnvioBoleto> envioBoletos) {
+    public static List<EnvioBoletoDto> converter(List<Envio> envioBoletos) {
         return envioBoletos.stream().map(EnvioBoletoDto::new).collect(Collectors.toList());
     }
 }

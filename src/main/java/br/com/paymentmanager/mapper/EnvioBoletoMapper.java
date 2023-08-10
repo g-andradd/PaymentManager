@@ -1,7 +1,6 @@
 package br.com.paymentmanager.mapper;
 
-import br.com.paymentmanager.model.EnvioBoleto;
-import br.com.paymentmanager.model.UploadFile;
+import br.com.paymentmanager.model.Envio;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class EnvioBoletoMapper {
 
-    public EnvioBoleto transformar(UploadFile uf) {
+    public Envio transformar(UploadFile uf) {
         try {
             return criarEnvioBoleto(uf);
         } catch (Exception e) {
@@ -18,16 +17,16 @@ public class EnvioBoletoMapper {
 
     }
 
-    public List<EnvioBoleto> transformarLista(List<UploadFile> ufList) {
-        List<EnvioBoleto> envioBoletos = new ArrayList<>();
+    public List<Envio> transformarLista(List<UploadFile> ufList) {
+        List<Envio> envioBoletos = new ArrayList<>();
         for(UploadFile uf : ufList) {
             envioBoletos.add(criarEnvioBoleto(uf));
         }
         return envioBoletos;
     }
 
-    private static EnvioBoleto criarEnvioBoleto(UploadFile uf) {
-        return EnvioBoleto.builder()
+    private static Envio criarEnvioBoleto(UploadFile uf) {
+        return Envio.builder()
                 .codigo(uf.getId())
                 .dataHoraCriacao(uf.getDataHoraIncusao())
                 .status(uf.getSituacaoArquivo())

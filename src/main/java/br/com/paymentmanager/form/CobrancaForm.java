@@ -1,8 +1,6 @@
 package br.com.paymentmanager.form;
 
 import br.com.paymentmanager.model.MeioDeContato;
-import br.com.paymentmanager.model.TipoAcordo;
-import br.com.paymentmanager.model.TipoAgente;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 

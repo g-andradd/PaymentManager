@@ -1,8 +1,7 @@
 package br.com.paymentmanager.dto;
 
 import br.com.paymentmanager.model.Empresa;
-import br.com.paymentmanager.model.RegistrosUploadFile;
-import br.com.paymentmanager.model.SituacaoArquivo;
+import br.com.paymentmanager.model.SituacaoPagamento;
 import br.com.paymentmanager.model.TipoArquivo;
 import lombok.Getter;
 
@@ -15,7 +14,7 @@ public class RegistroUploadFileDto {
     private final String nome;
     private final String local;
     private final TipoArquivo tipoArquivo;
-    private final SituacaoArquivo situacaoArquivo;
+    private final SituacaoPagamento situacaoArquivo;
     private final Date dataHoraIncusao;
     private final Date dataHoraAlteracao;
     private final Date dataHoraProcessamento;

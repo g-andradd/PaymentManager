@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ClienteWebDto {
 
-    private Long id;
+    private final Long id;
     private final String nome;
     private final String cpf;
     private final String telefone;
@@ -21,7 +21,7 @@ public class ClienteWebDto {
         this.id = cliente.getId();
         this.nome = cliente.getDadosPessoais().getNome();
         this.cpf = cliente.getDadosPessoais().getCpf();
-        this.telefone = cliente.getDadosPessoais().getTelefone();
+        this.telefone = cliente.getDadosPessoais().getCelular();
         this.local = cliente.getEndereco().getCidade() + "/" + cliente.getEndereco().getEstado();
         this.renda = cliente.getRenda();
         this.status = cliente.getStatus();

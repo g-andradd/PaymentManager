@@ -1,5 +1,5 @@
 package br.com.paymentmanager.model;
 
 public enum MeioDeContato {
-    EMAIL, TELEFONE;
+    EMAIL, SMS;
 }

@@ -1,6 +1,5 @@
 package br.com.paymentmanager.repository;
 
-import br.com.paymentmanager.model.UploadFile;
 import br.com.paymentmanager.projection.CodigosDosEnvios;
 import br.com.paymentmanager.projection.ResumoTotalCobrancas;
 import org.springframework.data.jpa.repository.JpaRepository;

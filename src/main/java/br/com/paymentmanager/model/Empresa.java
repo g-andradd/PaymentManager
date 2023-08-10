@@ -15,5 +15,8 @@ public class Empresa {
     private long id;
     private String token;
     private String nome;
+    private String cnpj;
+    @Embedded
+    private Endereco endereco;
 
 }

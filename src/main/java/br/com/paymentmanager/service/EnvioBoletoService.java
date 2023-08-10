@@ -39,7 +39,7 @@ public class EnvioBoletoService {
                 .findAllByData(validarEmpresa(idEmpresa).getId(), DataUtil.inserirAnoMes(data))
                 .orElseThrow(() -> new RuntimeException("Nenhuma cobraça encontrada"));
 
-        List<EnvioBoleto> envioBoletos = new EnvioBoletoMapper().transformarLista(ufList);
+        List<Envio> envioBoletos = new EnvioBoletoMapper().transformarLista(ufList);
 
         return EnvioBoletoDto.converter(envioBoletos);
     }
@@ -64,7 +64,7 @@ public class EnvioBoletoService {
     public void cancelarEnvioBoleto(String nomeUsuario, Long id) {
         UploadFile uf = this.envioBoletoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UploadFile não encontrado"));
-        uf.setSituacaoArquivo(SituacaoArquivo.CANCELADO);
+        uf.setSituacaoArquivo(SituacaoPagamento.CANCELADO);
         uf.setDataHoraAlteracao(Date.from(Instant.now()));
         uf.setUsuarioAlteracao(nomeUsuario);
         this.envioBoletoRepository.save(uf);

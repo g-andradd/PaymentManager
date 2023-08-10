@@ -2,8 +2,6 @@ package br.com.paymentmanager.model;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -12,11 +10,6 @@ public class Cliente {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(length=10)
   private Long id;
-
-  @Column(nullable=false, length=10)
-  private BigDecimal renda;
-
-  private BigDecimal limiteDivida;
 
   @Embedded
   private DadosPessoais dadosPessoais;
@@ -28,34 +21,25 @@ public class Cliente {
   @JoinColumn(nullable = false)
   private StatusCliente status = StatusCliente.ATIVO;
 
+  @ManyToOne
+  private Assinatura assinatura;
+
   public Cliente() {
   }
 
-  public Cliente(BigDecimal renda, DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status) {
-    this.renda = renda;
+  public Cliente(DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status, Assinatura assinatura) {
     this.dadosPessoais = dadosPessoais;
     this.endereco = endereco;
     this.status = status;
-  }
-
-  public void setLimiteDeDivida(){
-      this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
+    this.assinatura = assinatura;
   }
 
   public Long getId() {
     return id;
   }
 
-  public BigDecimal getRenda() {
-    return renda;
-  }
-
-  public void setRenda(BigDecimal renda) {
-    this.renda = renda;
-  }
-
-  public BigDecimal getLimiteDivida() {
-    return limiteDivida;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public DadosPessoais getDadosPessoais() {
@@ -66,100 +50,12 @@ public class Cliente {
     this.dadosPessoais = dadosPessoais;
   }
 
-  public String getNome(){
-    return dadosPessoais.getNome();
-  }
-
-  public void setNome(String nome){
-    this.dadosPessoais.setNome(nome);
-  }
-
-  public String getCpf(){
-    return dadosPessoais.getCpf();
-  }
-
-  public void setCpf(String cpf){
-    this.dadosPessoais.setCpf(cpf);
-  }
-
-  public String getTelefone(){
-    return dadosPessoais.getTelefone();
-  }
-
-  public void setTelefone(String telefone){
-    this.dadosPessoais.setTelefone(telefone);
-  }
-
-  public String getEmail(){
-    return dadosPessoais.getEmail();
-  }
-
-  public void setEmail(String email){
-    this.dadosPessoais.setEmail(email);
-  }
-
-  public String getProfissao(){
-    return dadosPessoais.getProfissao();
-  }
-
-  public void setProfissao(String profissao) {
-    this.dadosPessoais.setProfissao(profissao);
-  }
-
   public Endereco getEndereco() {
     return endereco;
   }
 
   public void setEndereco(Endereco endereco) {
     this.endereco = endereco;
-  }
-
-  public String getRua() {
-    return endereco.getRua();
-  }
-
-  public void setRua(String rua){
-    this.endereco.setRua(rua);
-  }
-
-  public String getNumero() {
-    return endereco.getNumero();
-  }
-
-  public void setNumero(String numero){
-    this.endereco.setNumero(numero);
-  }
-
-  public String getComplemento() {
-    return endereco.getComplemento();
-  }
-
-  public void setComplemento(String complemento){
-    this.endereco.setComplemento(complemento);
-  }
-
-  public String getBairro() {
-    return endereco.getBairro();
-  }
-
-  public void setBairro(String bairro){
-    this.endereco.setBairro(bairro);
-  }
-
-  public String getCidade() {
-    return endereco.getCidade();
-  }
-
-  public void setCidade(String cidade){
-    this.endereco.setCidade(cidade);
-  }
-
-  public String getEstado() {
-    return endereco.getEstado();
-  }
-
-  public void setEstado(String estado){
-    this.endereco.setEstado(estado);
   }
 
   public StatusCliente getStatus() {
@@ -170,14 +66,11 @@ public class Cliente {
     this.status = status;
   }
 
+  public Assinatura getAssinatura() {
+    return assinatura;
+  }
 
-  @Override
-  public String toString() {
-    return "Cliente{" +
-            "renda=" + renda +
-            ", dadosPessoais=" + dadosPessoais +
-            ", endereco=" + endereco +
-            ", status=" + status +
-            '}';
+  public void setAssinatura(Assinatura assinatura) {
+    this.assinatura = assinatura;
   }
 }

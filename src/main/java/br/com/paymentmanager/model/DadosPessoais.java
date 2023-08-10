@@ -12,11 +12,8 @@ public class DadosPessoais {
     @Column(nullable=false, length=100)
     private String nome;
 
-    @Column(nullable=false, length=50)
-    private String profissao;
-
     @Column(nullable=false, length=18)
-    private String telefone;
+    private String celular;
 
     @Column(nullable=false, length=100)
     private String email;
@@ -25,11 +22,10 @@ public class DadosPessoais {
     public DadosPessoais() {
     }
 
-    public DadosPessoais(String cpf, String nome, String profissao, String telefone, String email) {
+    public DadosPessoais(String cpf, String nome, String celular, String email) {
         this.cpf = cpf;
         this.nome = nome;
-        this.profissao = profissao;
-        this.telefone = telefone;
+        this.celular = celular;
         this.email = email;
     }
 
@@ -49,20 +45,12 @@ public class DadosPessoais {
         this.nome = nome;
     }
 
-    public String getProfissao() {
-        return profissao;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setCelular(String telefone) {
+        this.celular = telefone;
     }
 
     public String getEmail() {
@@ -71,16 +59,5 @@ public class DadosPessoais {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "DadosPessoais{" +
-                "cpf='" + cpf + '\'' +
-                ", nome='" + nome + '\'' +
-                ", profissao='" + profissao + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

@@ -2,8 +2,6 @@ package br.com.paymentmanager.dto;
 
 import br.com.paymentmanager.model.Cobranca;
 import br.com.paymentmanager.model.MeioDeContato;
-import br.com.paymentmanager.model.TipoAcordo;
-import br.com.paymentmanager.model.TipoAgente;
 
 import java.time.LocalDate;
 

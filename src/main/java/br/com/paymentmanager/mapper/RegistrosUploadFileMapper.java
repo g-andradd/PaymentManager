@@ -1,8 +1,5 @@
 package br.com.paymentmanager.mapper;
 
-import br.com.paymentmanager.model.RegistrosUploadFile;
-import br.com.paymentmanager.model.UploadFile;
-
 import java.time.Instant;
 import java.util.Date;
 
