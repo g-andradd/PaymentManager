@@ -2,8 +2,9 @@ package br.com.paymentmanager.controller;
 
 import br.com.paymentmanager.dto.ClienteDto;
 import br.com.paymentmanager.dto.ClienteWebDto;
-import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
+import br.com.paymentmanager.form.DadosPessoaisForm;
+import br.com.paymentmanager.form.EnderecoForm;
 import br.com.paymentmanager.projection.RelatorioClientesProjecao;
 import br.com.paymentmanager.service.ClienteService;
 import jakarta.validation.Valid;
@@ -53,9 +54,14 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.detalhar(id));
     }
 
-    @PutMapping
-    public ResponseEntity<ClienteDto> atualizar(@RequestBody @Valid AtualizaClienteForm form) {
-        return ResponseEntity.ok(clienteService.atualizar(form));
+    @PutMapping("/dadosPessoais/{id}")
+    public ResponseEntity<ClienteDto> atualizarDadosPessoais(@PathVariable Long id, @RequestBody @Valid DadosPessoaisForm form) {
+        return ResponseEntity.ok(clienteService.atualizarDadosPessoais(id, form));
+    }
+
+    @PutMapping("/endereco/{id}")
+    public ResponseEntity<ClienteDto> atualizarEndereco(@PathVariable Long id, @RequestBody @Valid EnderecoForm form) {
+        return ResponseEntity.ok(clienteService.atualizarEndereco(id, form));
     }
 
     @DeleteMapping("/{id}")

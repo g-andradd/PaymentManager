@@ -1,53 +1,37 @@
 package br.com.paymentmanager.mapper;
 
-import br.com.paymentmanager.form.AtualizaClienteForm;
 import br.com.paymentmanager.form.ClienteForm;
+import br.com.paymentmanager.form.DadosPessoaisForm;
+import br.com.paymentmanager.form.EnderecoForm;
 import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.DadosPessoais;
 import br.com.paymentmanager.model.Endereco;
-import br.com.paymentmanager.model.StatusCliente;
 
 public class ClienteMapper {
 
     public Cliente cadastrar(ClienteForm form) {
-        DadosPessoais dadosPessoais;
-        Endereco endereco;
-        StatusCliente statusCliente = StatusCliente.ATIVO;
-        dadosPessoais = new DadosPessoais(form.getCpf(), form.getNome(), form.getProfissao(), form.getTelefone(), form.getEmail());
-        endereco = new Endereco(form.getRua(), form.getNumero(), form.getBairro(), form.getCidade(), form.getEstado());
+        DadosPessoais dadosPessoais = new DadosPessoais(form.getCpf(), form.getNome(), form.getCelular(), form.getEmail());
+        Endereco endereco = new Endereco(form.getCep(), form.getNumero(), form.getBairro(), form.getCidade(), form.getEstado());
         if (form.getComplemento() != null) {
             endereco.setComplemento(form.getComplemento());
         }
-        if (form.getStatus().equals("SUSPENSO")) {
-            statusCliente = StatusCliente.SUSPENSO;
-        }
-        return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
+        return new Cliente(dadosPessoais, endereco);
     }
 
-    public Cliente atualizar(Cliente cliente, AtualizaClienteForm form) {
-        criarCliente(cliente, form);
+    public Cliente atualizarDadosPessoais(Cliente cliente, DadosPessoaisForm form) {
+        DadosPessoais dadosPessoais = new DadosPessoais(form.getCpf(), form.getNome(), form.getCelular(), form.getEmail());
+        cliente.setDadosPessoais(dadosPessoais);
+
         return cliente;
     }
 
-    private void criarCliente(Cliente cliente, AtualizaClienteForm form) {
-        cliente.setNome(form.getNome());
-        cliente.setTelefone(form.getTelefone());
-        cliente.setEmail(form.getEmail());
-        cliente.setRua(form.getRua());
-        cliente.setNumero(form.getNumero());
-        cliente.setBairro(form.getBairro());
-        cliente.setCidade(form.getCidade());
-        cliente.setEstado(form.getEstado());
-        cliente.setProfissao(form.getProfissao());
-        cliente.setRenda(form.getRenda());
-
+    public Cliente atualizarEndereco(Cliente cliente, EnderecoForm form) {
+        Endereco endereco = new Endereco(form.getCep(), form.getNumero(), form.getBairro(), form.getCidade(), form.getEstado());
+        cliente.setEndereco(endereco);
         if (form.getComplemento() != null) {
-            cliente.setComplemento(form.getComplemento());
+            endereco.setComplemento(form.getComplemento());
         }
-        if (form.getStatus().equals("ATIVO")) {
-            cliente.setStatus(StatusCliente.ATIVO);
-        } else {
-            cliente.setStatus(StatusCliente.SUSPENSO);
-        }
+
+        return cliente;
     }
 }

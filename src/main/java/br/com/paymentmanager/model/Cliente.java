@@ -27,11 +27,10 @@ public class Cliente {
   public Cliente() {
   }
 
-  public Cliente(DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status, Assinatura assinatura) {
+  public Cliente(DadosPessoais dadosPessoais, Endereco endereco) {
     this.dadosPessoais = dadosPessoais;
     this.endereco = endereco;
-    this.status = status;
-    this.assinatura = assinatura;
+    this.status = StatusCliente.SUSPENSO;
   }
 
   public Long getId() {

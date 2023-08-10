@@ -3,8 +3,6 @@ package br.com.paymentmanager.service;
 import br.com.paymentmanager.dto.CodigosDosEnviosDto;
 import br.com.paymentmanager.dto.EnvioBoletoDto;
 import br.com.paymentmanager.dto.ResumoTotalDto;
-import br.com.paymentmanager.mapper.EnvioBoletoMapper;
-import br.com.paymentmanager.mapper.RegistrosUploadFileMapper;
 import br.com.paymentmanager.model.*;
 import br.com.paymentmanager.projection.CodigosDosEnvios;
 import br.com.paymentmanager.projection.ResumoTotalCobrancas;

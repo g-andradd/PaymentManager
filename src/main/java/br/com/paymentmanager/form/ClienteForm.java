@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import java.math.BigDecimal;
-
 public class ClienteForm {
 
     @NotBlank(message = "O campo nome não pode estar em branco")
@@ -17,17 +15,18 @@ public class ClienteForm {
     private String cpf;
 
     @NotBlank(message = "O campo telefone não pode estar em branco")
-    private String telefone;
+    private String celular;
 
     @NotBlank(message = "O campo e-mail não pode estar em branco")
     @Email
     private String email;
 
     @NotBlank(message = "O campo rua não pode estar em branco")
-    private String rua;
+    private String cep;
 
-    @NotBlank(message = "O campo número não pode estar em branco")
-    private String numero;
+    @NotNull(message = "O campo número não pode estar nulo")
+    @Positive(message = "O campo número deve ser positivo")
+    private int numero;
 
     private String complemento;
 
@@ -40,15 +39,6 @@ public class ClienteForm {
     @NotBlank(message = "O campo estado não pode estar em branco")
     private String estado;
 
-    @NotBlank(message = "O campo profissão não pode estar em branco")
-    private String profissao;
-
-    @NotNull(message = "O campo renda não pode ser nulo")
-    @Positive(message = "O valor da renda precisa ser maior que 0")
-    private BigDecimal renda;
-
-    private String status;
-
     public String getNome() {
         return nome;
     }
@@ -57,19 +47,19 @@ public class ClienteForm {
         return cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getCelular() {
+        return celular;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getRua() {
-        return rua;
+    public String getCep() {
+        return cep;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
@@ -89,18 +79,6 @@ public class ClienteForm {
         return estado;
     }
 
-    public String getProfissao() {
-        return profissao;
-    }
-
-    public BigDecimal getRenda() {
-        return renda;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -109,19 +87,19 @@ public class ClienteForm {
         this.cpf = cpf;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -139,18 +117,6 @@ public class ClienteForm {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
-    }
-
-    public void setRenda(BigDecimal renda) {
-        this.renda = renda;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
 }
