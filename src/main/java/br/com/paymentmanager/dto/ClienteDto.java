@@ -3,8 +3,6 @@ package br.com.paymentmanager.dto;
 import br.com.paymentmanager.model.Cliente;
 import br.com.paymentmanager.model.StatusCliente;
 
-import java.math.BigDecimal;
-
 public class ClienteDto {
 
     private final Long id;
@@ -13,13 +11,13 @@ public class ClienteDto {
 
     private final String cpf;
 
-    private final String telefone;
+    private final String celular;
 
     private final String email;
 
     private final String rua;
 
-    private final String numero;
+    private final int numero;
 
     private final String complemento;
 
@@ -29,26 +27,20 @@ public class ClienteDto {
 
     private final String estado;
 
-    private final String profissao;
-
-    private final BigDecimal renda;
-
     private final StatusCliente status;
 
     public ClienteDto(Cliente cliente){
         this.id = cliente.getId();
-        this.nome = cliente.getNome();
-        this.cpf = cliente.getCpf();
-        this.telefone = cliente.getTelefone();
-        this.email = cliente.getEmail();
-        this.rua = cliente.getRua();
-        this.numero = cliente.getNumero();
-        this.complemento = cliente.getComplemento();
-        this.bairro = cliente.getBairro();
-        this.cidade = cliente.getCidade();
-        this.estado = cliente.getEstado();
-        this.profissao = cliente.getProfissao();
-        this.renda = cliente.getRenda();
+        this.nome = cliente.getDadosPessoais().getNome();
+        this.cpf = cliente.getDadosPessoais().getCpf();
+        this.celular = cliente.getDadosPessoais().getCelular();
+        this.email = cliente.getDadosPessoais().getEmail();
+        this.rua = cliente.getEndereco().getCep();
+        this.numero = cliente.getEndereco().getNumero();
+        this.complemento = cliente.getEndereco().getComplemento();
+        this.bairro = cliente.getEndereco().getBairro();
+        this.cidade = cliente.getEndereco().getCidade();
+        this.estado = cliente.getEndereco().getEstado();
         this.status = cliente.getStatus();
     }
 
@@ -64,8 +56,8 @@ public class ClienteDto {
         return cpf;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getCelular() {
+        return celular;
     }
 
     public String getEmail() {
@@ -76,7 +68,7 @@ public class ClienteDto {
         return rua;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
@@ -94,14 +86,6 @@ public class ClienteDto {
 
     public String getEstado() {
         return estado;
-    }
-
-    public String getProfissao() {
-        return profissao;
-    }
-
-    public BigDecimal getRenda() {
-        return renda;
     }
 
     public StatusCliente getStatus() {

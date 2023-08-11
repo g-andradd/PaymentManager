@@ -8,19 +8,19 @@ import java.time.LocalDate;
 
 public class DividaComCpfDto {
 
-    private Long id;
+    private final Long id;
 
-    private BigDecimal valor;
+    private final BigDecimal valor;
 
-    private LocalDate dataDeAbertura;
+    private final LocalDate dataDeAbertura;
 
-    private LocalDate dataDeQuitacao;
+    private final LocalDate dataDeQuitacao;
 
-    private StatusDivida status;
+    private final StatusDivida status;
 
-    private String descricaoDeQuitacao;
+    private final String descricaoDeQuitacao;
 
-    private String cpf;
+    private final String cpf;
 
     public DividaComCpfDto(Divida divida) {
         this.id = divida.getId();
@@ -29,7 +29,7 @@ public class DividaComCpfDto {
         this.dataDeQuitacao = divida.getDataDeQuitacao();
         this.status = divida.getStatus();
         this.descricaoDeQuitacao = divida.getDescricaoDeQuitacao();
-        this.cpf = divida.getCliente().getCpf();
+        this.cpf = divida.getCliente().getDadosPessoais().getCpf();
     }
 
     public Long getId() {

@@ -7,7 +7,7 @@ import br.com.paymentmanager.model.*;
 import br.com.paymentmanager.projection.CodigosDosEnvios;
 import br.com.paymentmanager.projection.ResumoTotalCobrancas;
 import br.com.paymentmanager.repository.EmpresaRepository;
-import br.com.paymentmanager.repository.EnvioBoletoRepository;
+import br.com.paymentmanager.repository.EnvioRepository;
 import br.com.paymentmanager.util.DataUtil;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EnvioBoletoService {
+public class EnvioService {
 
-    private final EnvioBoletoRepository envioBoletoRepository;
+    private final EnvioRepository envioBoletoRepository;
     private final EmpresaRepository empresaRepository;
 
     private final RegistrosUploadFileService registrosUploadFileService;
 
-    public EnvioBoletoService(EnvioBoletoRepository envioBoletoRepository, EmpresaRepository empresaRepository, RegistrosUploadFileService registrosUploadFileService) {
+    public EnvioService(EnvioRepository envioBoletoRepository, EmpresaRepository empresaRepository, RegistrosUploadFileService registrosUploadFileService) {
         this.envioBoletoRepository = envioBoletoRepository;
         this.empresaRepository = empresaRepository;
         this.registrosUploadFileService = registrosUploadFileService;

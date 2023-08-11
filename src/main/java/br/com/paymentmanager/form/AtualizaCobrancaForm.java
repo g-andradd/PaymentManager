@@ -21,16 +21,11 @@ public class AtualizaCobrancaForm {
     @NotBlank
     private String agente;
 
-    @NotNull
-    private TipoAgente tipoDeAgente;
-
     @NotNull @Length(max = 500)
     private String comentarioDoAgente;
 
     @Length(max = 500)
     private String acordo;
-
-    private TipoAcordo tipoDeAcordo;
 
     @Future
     private LocalDate dataDePromessaDePagamento;
@@ -57,20 +52,12 @@ public class AtualizaCobrancaForm {
         return agente;
     }
 
-    public TipoAgente getTipoDeAgente() {
-        return tipoDeAgente;
-    }
-
     public String getComentarioDoAgente() {
         return comentarioDoAgente;
     }
 
     public String getAcordo() {
         return acordo;
-    }
-
-    public TipoAcordo getTipoDeAcordo() {
-        return tipoDeAcordo;
     }
 
     public LocalDate getDataDePromessaDePagamento() {
@@ -97,20 +84,12 @@ public class AtualizaCobrancaForm {
         this.agente = agente;
     }
 
-    public void setTipoDeAgente(TipoAgente tipoDeAgente) {
-        this.tipoDeAgente = tipoDeAgente;
-    }
-
     public void setComentarioDoAgente(String comentarioDoAgente) {
         this.comentarioDoAgente = comentarioDoAgente;
     }
 
     public void setAcordo(String acordo) {
         this.acordo = acordo;
-    }
-
-    public void setTipoDeAcordo(TipoAcordo tipoDeAcordo) {
-        this.tipoDeAcordo = tipoDeAcordo;
     }
 
     public void setDataDePromessaDePagamento(LocalDate dataDePromessaDePagamento) {
