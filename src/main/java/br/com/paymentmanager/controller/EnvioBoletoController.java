@@ -3,7 +3,7 @@ package br.com.paymentmanager.controller;
 import br.com.paymentmanager.dto.CodigosDosEnviosDto;
 import br.com.paymentmanager.dto.EnvioBoletoDto;
 import br.com.paymentmanager.dto.ResumoTotalDto;
-import br.com.paymentmanager.service.EnvioBoletoService;
+import br.com.paymentmanager.service.EnvioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("/envios")
 public class EnvioBoletoController {
 
-    private final EnvioBoletoService envioBoletoService;
+    private final EnvioService envioBoletoService;
 
-    public EnvioBoletoController(EnvioBoletoService envioBoletoService) {
+    public EnvioBoletoController(EnvioService envioBoletoService) {
         this.envioBoletoService = envioBoletoService;
     }
 

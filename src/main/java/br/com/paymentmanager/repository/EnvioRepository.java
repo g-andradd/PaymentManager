@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface EnvioBoletoRepository extends JpaRepository<UploadFile, Long> {
+public interface EnvioRepository extends JpaRepository<UploadFile, Long> {
 
     @Query(value = "select * from sorpag_upload_file " +
             "where codigo_empresa = ?1 "+

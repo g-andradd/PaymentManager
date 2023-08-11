@@ -15,13 +15,9 @@ public class CobrancaDto {
 
     private String agente;
 
-    private TipoAgente tipoDeAgente;
-
     private String comentarioDoAgente;
 
     private String acordo;
-
-    private TipoAcordo tipoDeAcordo;
 
     private LocalDate dataDePromessaDePagamento;
 
@@ -37,10 +33,8 @@ public class CobrancaDto {
         this.dataDeRealizacao = cobranca.getDataDeRealizacao();
         this.meioDeContato = cobranca.getMeioDeContato();
         this.agente = cobranca.getAgente();
-        this.tipoDeAgente = cobranca.getTipoDeAgente();
         this.comentarioDoAgente = cobranca.getComentarioDoAgente();
         this.acordo = cobranca.getAcordo();
-        this.tipoDeAcordo = cobranca.getTipoDeAcordo();
         this.dataDePromessaDePagamento = cobranca.getDataDePromessaDePagamento();
         this.numeroDeParcelas = cobranca.getNumeroDeParcelas();
         this.idDivida = cobranca.getDivida().getId();
@@ -62,20 +56,12 @@ public class CobrancaDto {
         return agente;
     }
 
-    public TipoAgente getTipoDeAgente() {
-        return tipoDeAgente;
-    }
-
     public String getComentarioDoAgente() {
         return comentarioDoAgente;
     }
 
     public String getAcordo() {
         return acordo;
-    }
-
-    public TipoAcordo getTipoDeAcordo() {
-        return tipoDeAcordo;
     }
 
     public LocalDate getDataDePromessaDePagamento() {
